@@ -13,6 +13,8 @@
 		FA72124F145C4459003C65EB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FA72124D145C4459003C65EB /* Credits.rtf */; };
 		FA721252145C4459003C65EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA721251145C4459003C65EB /* AppDelegate.m */; };
 		FA721255145C4459003C65EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA721253145C4459003C65EB /* MainMenu.xib */; };
+		FA72125D145C4510003C65EB /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA72125C145C4510003C65EB /* GraphView.m */; };
+		FA721260145C4692003C65EB /* GraphPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA72125F145C4692003C65EB /* GraphPoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +23,18 @@
 		FA721241145C4459003C65EB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		FA721242145C4459003C65EB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		FA721243145C4459003C65EB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		FA721246145C4459003C65EB /* PointGrapher-Info.plist */ = {isa = PBXFileReference; path = "PointGrapher-Info.plist"; sourceTree = "<group>"; };
+		FA721246145C4459003C65EB /* PointGrapher-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PointGrapher-Info.plist"; sourceTree = "<group>"; };
 		FA721248145C4459003C65EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FA72124A145C4459003C65EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FA72124C145C4459003C65EB /* PointGrapher-Prefix.pch */ = {isa = PBXFileReference; path = "PointGrapher-Prefix.pch"; sourceTree = "<group>"; };
+		FA72124C145C4459003C65EB /* PointGrapher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PointGrapher-Prefix.pch"; sourceTree = "<group>"; };
 		FA72124E145C4459003C65EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		FA721250145C4459003C65EB /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		FA721250145C4459003C65EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FA721251145C4459003C65EB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FA721254145C4459003C65EB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FA72125B145C4510003C65EB /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		FA72125C145C4510003C65EB /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		FA72125E145C4692003C65EB /* GraphPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphPoint.h; sourceTree = "<group>"; };
+		FA72125F145C4692003C65EB /* GraphPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphPoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,10 @@
 				FA721250145C4459003C65EB /* AppDelegate.h */,
 				FA721251145C4459003C65EB /* AppDelegate.m */,
 				FA721253145C4459003C65EB /* MainMenu.xib */,
+				FA72125B145C4510003C65EB /* GraphView.h */,
+				FA72125C145C4510003C65EB /* GraphView.m */,
+				FA72125E145C4692003C65EB /* GraphPoint.h */,
+				FA72125F145C4692003C65EB /* GraphPoint.m */,
 				FA721245145C4459003C65EB /* Supporting Files */,
 			);
 			path = PointGrapher;
@@ -167,6 +177,8 @@
 			files = (
 				FA72124B145C4459003C65EB /* main.m in Sources */,
 				FA721252145C4459003C65EB /* AppDelegate.m in Sources */,
+				FA72125D145C4510003C65EB /* GraphView.m in Sources */,
+				FA721260145C4692003C65EB /* GraphPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,9 +7,22 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GraphView.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate> {
+	
+}
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSWindow * window;
+@property (assign) IBOutlet GraphView * graph;
+@property (assign) IBOutlet NSTableView * tableView;
+
+- (IBAction)zoomIn:(id)sender;
+- (IBAction)zoomOut:(id)sender;
+- (IBAction)revertZoom:(id)sender;
+- (IBAction)center:(id)sender;
+
+- (IBAction)addPoint:(id)sender;
+- (IBAction)removePoint:(id)sender;
 
 @end
