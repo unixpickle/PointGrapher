@@ -3,9 +3,7 @@ PointGrapher
 
 PointGrapher is a simple Cocoa application written for Mac OS X that can plot points inputted by the user. This could be useful, for instance, in a classroom setting where a diagram needs to be displayed over a projector. Use simple keystrokes for zooming in and out, and drag the mouse around to freely translate the axes.
 
-<center>
 ![Example screenshot of PointGrapher](https://github.com/unixpickle/PointGrapher/raw/master/example.png)
-</center>
 
 ## The *GraphView* class
 
