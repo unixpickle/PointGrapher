@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "GraphPoint.h"
+#import "RectArray.h"
 
 #define kTickSpacing 82.0
 
@@ -15,6 +16,8 @@
 	NSMutableArray * points;
 	CGFloat zoomFactor;
 	CGPoint translateAxis;
+	
+	RectArray * labelRects;
 	
 	NSPoint startDrag;
 	CGPoint startTranslate;

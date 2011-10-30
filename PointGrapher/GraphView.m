@@ -26,6 +26,7 @@
 	if ((self = [super initWithFrame:frame])) {
 		zoomFactor = 1;
 		points = [[NSMutableArray alloc] init];
+		labelRects = [[RectArray alloc] init];
 	}
 	return self;
 }
@@ -94,6 +95,7 @@
 	CGContextSetRGBFillColor(context, 1, 1, 1, 1);
 	CGContextFillRect(context, self.bounds);
 	// draw the axis
+	[labelRects removeAllRects];
 	[self drawAxisLines:context];
 	CGContextSetRGBFillColor(context, 0, 0, 0, 1);
 	for (GraphPoint * point in points) {
@@ -204,6 +206,7 @@
 			textFrame.origin.y = self.frame.size.height - (textFrame.size.height + 2);
 		}
 		[numberString drawInRect:textFrame withAttributes:attributes];
+		[labelRects addRect:textFrame];
 	}
 }
 
@@ -238,14 +241,15 @@
 			textFrame.origin.x = self.frame.size.width - (textFrame.size.width + 6);
 		}
 		[numberString drawInRect:textFrame withAttributes:attributes];
+		[labelRects addRect:textFrame];
 	}
 }
 
 - (void)drawPoint:(GraphPoint *)aPoint context:(CGContextRef)context {
-	CGFloat xLocation = self.frame.size.width / 2 + translateAxis.x;
-	CGFloat yLocation = self.frame.size.height / 2 + translateAxis.y;
+	__block CGFloat xLocation = self.frame.size.width / 2 + translateAxis.x;
+	__block CGFloat yLocation = self.frame.size.height / 2 + translateAxis.y;
 	
-	CGPoint drawPoint = [self pointForGraphPoint:aPoint];
+	__block CGPoint drawPoint = [self pointForGraphPoint:aPoint];
 	if (!CGRectContainsPoint(CGRectMake(0, 0, self.frame.size.width, self.frame.size.height), drawPoint)) {
 		return;
 	}
@@ -254,26 +258,106 @@
 															forKey:NSFontAttributeName];
 	NSSize letterSize = [[aPoint pointName] sizeWithAttributes:attributes];
 	
-	NSRect rect = NSZeroRect;
+	__block NSRect rect = NSZeroRect;
 	rect.size = letterSize;
 	
-	rect.origin.x = drawPoint.x - letterSize.width / 2.0;
+	rect.origin.x = drawPoint.x + 4;
 	rect.origin.y = drawPoint.y + 4;
 	
-	// move it over if it's through the axis
-	if (xLocation >= rect.origin.x && xLocation <= rect.origin.x + rect.size.width) {
-		if (drawPoint.x < xLocation) {
-			rect.origin.x = xLocation - rect.size.width - 4;
-		} else {
-			rect.origin.x = xLocation + 4;
+	
+#define flipXCoord flippedOnX = !flippedOnX;\
+if (flippedOnX) {\
+rect.origin.x = drawPoint.x - rect.size.width - 4;\
+} else {\
+rect.origin.x = drawPoint.x + 4;\
+}
+	
+#define flipYCoord flippedOnY = !flippedOnY;\
+if (flippedOnY) {\
+rect.origin.y = drawPoint.y - rect.size.height;\
+} else {\
+rect.origin.y = drawPoint.y;\
+}
+	
+	// Here we go through a number of different scenarios for where the label
+	// should be. By doing this, we can place the label at a point where it is
+	// least likely to interfere with things around it.
+	
+	BOOL flippedOnX = NO;
+	BOOL flippedOnY = NO;
+	
+	__block BOOL (^doesLabelIntersectVertical)(void) = ^{
+		int startLineIndexX = (int)floor(xLocation / kTickSpacing);
+		int endIndexX = (int)floor((self.frame.size.width - xLocation) / kTickSpacing);
+		for (int lineIndex = -startLineIndexX; lineIndex <= endIndexX; lineIndex++) {
+			CGFloat lineX = xLocation + ((CGFloat)lineIndex * kTickSpacing);
+			if (lineX > rect.origin.x && lineX < rect.origin.x + rect.size.width) {
+				return YES;
+			}
+		}
+		return NO;
+	};
+	
+	__block BOOL (^doesLabelIntersectHorizontall)(void) = ^{
+		int startLineIndexY = (int)floor(yLocation / kTickSpacing);
+		int endIndexY = (int)floor((self.frame.size.height - yLocation) / kTickSpacing);
+		for (int lineIndex = -startLineIndexY; lineIndex <= endIndexY; lineIndex++) {
+			CGFloat lineY = yLocation + ((CGFloat)lineIndex * kTickSpacing);
+			if (lineY > rect.origin.y && lineY < rect.origin.y + rect.size.height) {
+				return YES;
+			}
+		}
+		return NO;
+	};
+	
+	__block BOOL (^doesLabelIntersectLabel)(void) = ^{
+		for (NSUInteger rectIndex = 0; rectIndex < [labelRects numberOfRects]; rectIndex++) {
+			NSRect textRect = [labelRects rectAtIndex:rectIndex];
+			CGRect textCG = NSRectToCGRect(textRect);
+			if (CGRectIntersectsRect(textCG, NSRectToCGRect(rect))) {
+				return YES;
+			}
+		}
+		return NO;
+	};
+	
+	BOOL (^doesLabelOverlapElements)(void) = ^{
+		if (doesLabelIntersectLabel() || doesLabelIntersectHorizontall() || doesLabelIntersectVertical()) {
+			return YES;
+		}
+		return NO;
+	};
+	
+	BOOL flipCoordinatesNoLines = NO;
+	
+	if (doesLabelOverlapElements()) {
+		flipXCoord;
+		if (doesLabelOverlapElements()) {
+			flipYCoord;
+			if (doesLabelOverlapElements()) {
+				flipXCoord;
+				if (doesLabelOverlapElements()) {
+					flipCoordinatesNoLines = YES;
+				}
+			}
 		}
 	}
-	if (yLocation >= rect.origin.y && yLocation <= rect.origin.y + rect.size.height) {
-		rect.origin.y = drawPoint.y - rect.size.height - 3;
+	
+	if (flipCoordinatesNoLines) {
+		if (doesLabelIntersectLabel()) {
+			flipXCoord;
+			if (doesLabelIntersectLabel()) {
+				flipYCoord;
+				if (doesLabelIntersectLabel()) {
+					flipXCoord;
+				}
+			}
+		}
 	}
 	
 	CGContextFillEllipseInRect(context, CGRectMake(drawPoint.x - 3, drawPoint.y - 3, 6, 6));
 	[[aPoint pointName] drawInRect:rect withAttributes:attributes];
+	[labelRects addRect:rect];
 }
 
 @end

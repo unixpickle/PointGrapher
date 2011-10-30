@@ -15,6 +15,7 @@
 		FA721255145C4459003C65EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA721253145C4459003C65EB /* MainMenu.xib */; };
 		FA72125D145C4510003C65EB /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA72125C145C4510003C65EB /* GraphView.m */; };
 		FA721260145C4692003C65EB /* GraphPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FA72125F145C4692003C65EB /* GraphPoint.m */; };
+		FA7F2A93145E012900F4E18A /* RectArray.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7F2A92145E012900F4E18A /* RectArray.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		FA72125C145C4510003C65EB /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 		FA72125E145C4692003C65EB /* GraphPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphPoint.h; sourceTree = "<group>"; };
 		FA72125F145C4692003C65EB /* GraphPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphPoint.m; sourceTree = "<group>"; };
+		FA7F2A91145E012900F4E18A /* RectArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectArray.h; sourceTree = "<group>"; };
+		FA7F2A92145E012900F4E18A /* RectArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectArray.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 				FA72125C145C4510003C65EB /* GraphView.m */,
 				FA72125E145C4692003C65EB /* GraphPoint.h */,
 				FA72125F145C4692003C65EB /* GraphPoint.m */,
+				FA7F2A91145E012900F4E18A /* RectArray.h */,
+				FA7F2A92145E012900F4E18A /* RectArray.m */,
 				FA721245145C4459003C65EB /* Supporting Files */,
 			);
 			path = PointGrapher;
@@ -179,6 +184,7 @@
 				FA721252145C4459003C65EB /* AppDelegate.m in Sources */,
 				FA72125D145C4510003C65EB /* GraphView.m in Sources */,
 				FA721260145C4692003C65EB /* GraphPoint.m in Sources */,
+				FA7F2A93145E012900F4E18A /* RectArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +306,7 @@
 				FA72125A145C4459003C65EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
